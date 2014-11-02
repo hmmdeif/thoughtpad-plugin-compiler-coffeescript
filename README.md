@@ -4,7 +4,7 @@ thoughtpad-plugin-compiler-coffeescript
 [![build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 
-A thoughtpad plugin that response to Javascript compile events. Coffeescript will be compiled to Javascript for use in the browser.
+A thoughtpad plugin that responds to Javascript compile events. Coffeescript will be compiled to Javascript for use in the browser.
 
 ## Usage
 
