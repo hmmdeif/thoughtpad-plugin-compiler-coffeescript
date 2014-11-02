@@ -18,7 +18,7 @@ describe("coffeescript compilation plugin", function () {
         thoughtpad = man.registerPlugins([app]);
 
         thoughtpad.subscribe("javascript-compile-complete", function *() {
-            true.should.be.true;
+            true.should.be.false; // Should never hit here because the extension is not coffee
         });
 
         thoughtpad.notify("javascript-compile-request", { ext: "js" });
