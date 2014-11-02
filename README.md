@@ -1,0 +1,2 @@
+thoughtpad-plugin-compiler-coffeescript
+=======================================
