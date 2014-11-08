@@ -1,13 +1,12 @@
-var coffee = require('coffee-script'),
-    _thoughtpad;
+var _thoughtpad;
 
 var init = function (thoughtpad) {
     _thoughtpad = thoughtpad;
-    _thoughtpad.subscribe("javascript-compile-request", compileJs);
+    _thoughtpad.subscribe("javascript-compile-request", compile);
 },
 
-compileJs = function *(obj) {
-    if (obj.ext !== "coffee") return;
+compile = function *(obj) {
+    if (obj.ext !== "cof") return;
 
     yield _thoughtpad.notify("javascript-compile-complete", coffee.compile(obj.contents, {bare: true }));
 };
