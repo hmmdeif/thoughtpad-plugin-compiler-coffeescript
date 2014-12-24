@@ -9,7 +9,7 @@ var init = function (thoughtpad) {
 compileJs = function *(obj) {
     if (obj.ext !== "coffee") return;
 
-    yield _thoughtpad.notify("javascript-compile-complete", coffee.compile(obj.contents, {bare: true }));
+    yield _thoughtpad.notify("javascript-compile-complete", { contents: coffee.compile(obj.contents, {bare: true }), name: obj.name });
 };
 
 module.exports = {

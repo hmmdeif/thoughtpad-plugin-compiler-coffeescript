@@ -16,9 +16,9 @@ var man = require('thoughtpad-plugin-manager'),
 
 var thoughtpad = man.registerPlugins([coffeeCompiler]);
 thoughtpad.subscribe("javascript-compile-complete", function (data) {
-    console.log("Javascript is returned here"); 
+    console.log("Javascript is returned here in data object"); 
 });
-thoughtpad.notify("javascript-compile-request", { ext: "coffee", contents: "your coffee code here" });
+thoughtpad.notify("javascript-compile-request", { ext: "coffee", name: "name of the file", contents: "your coffee code here" });
 ```
 
 ## Tests
