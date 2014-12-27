@@ -49,4 +49,29 @@ describe("coffeescript compilation plugin", function () {
         })();
         
     });
+
+    it("should compile coffeescript with custom config", function (done) {
+        var contents = "",
+            name = "";
+
+        thoughtpad = man.registerPlugins([app, testapp]);
+        thoughtpad.config = {
+            eventData: {
+                'javascript-compile': { bare: true }
+            }
+        };
+
+        thoughtpad.subscribe("javascript-compile-complete", function *(res) {
+            contents = res.contents;
+            name = res.name;
+        });
+
+        co(function *() {
+            yield thoughtpad.notify("javascript-compile-request", { ext: "coffee", name: "hello", contents: "$(document).ready ->\n\t$('#cv-content-toggle').click ->\n\t$('#cv-content').toggle()" });
+            contents.should.equal("$(document).ready(function() {\n  $('#cv-content-toggle').click(function() {});\n  return $('#cv-content').toggle();\n});\n");
+            name.should.equal("hello");
+            done();
+        })();
+        
+    });
 });
