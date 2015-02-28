@@ -6,7 +6,7 @@ var should = require('should'),
     thoughtpad;
 
 describe("coffeescript compilation plugin", function () {
-    it("should register correctly to events", function () {
+    it("should register correctly to events", function (done) {
         thoughtpad = man.registerPlugins([app]);
 
         thoughtpad.subscribe("javascript-compile-complete", function *() {
@@ -15,10 +15,11 @@ describe("coffeescript compilation plugin", function () {
 
         co(function *() {
             yield thoughtpad.notify("javascript-compile-request", { ext: "coffee", contents: "" });
-        })();
+            done();
+        }).catch(done);
     });
 
-    it("should ignore anything other than coffeescript", function () {
+    it("should ignore anything other than coffeescript", function (done) {
         thoughtpad = man.registerPlugins([app, testapp]);
 
         thoughtpad.subscribe("javascript-compile-complete", function *() {
@@ -27,7 +28,8 @@ describe("coffeescript compilation plugin", function () {
 
         co(function *() {
             yield thoughtpad.notify("javascript-compile-request", { ext: "js" });
-        })();
+            done();
+        }).catch(done);
     });
 
     it("should compile coffeescript", function (done) {
@@ -46,7 +48,7 @@ describe("coffeescript compilation plugin", function () {
             contents.should.equal("$(document).ready(function() {\n  $('#cv-content-toggle').click(function() {});\n  return $('#cv-content').toggle();\n});\n");
             name.should.equal("hello");
             done();
-        })();
+        }).catch(done);
         
     });
 
@@ -71,7 +73,7 @@ describe("coffeescript compilation plugin", function () {
             contents.should.equal("$(document).ready(function() {\n  $('#cv-content-toggle').click(function() {});\n  return $('#cv-content').toggle();\n});\n");
             name.should.equal("hello");
             done();
-        })();
+        }).catch(done);
         
     });
 });
